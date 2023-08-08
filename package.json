@@ -1,0 +1,31 @@
+{
+  "name": "restaurant-app-api",
+  "version": "1.0.0",
+  "description": "API for restaurant-app project",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtw-programmer/restaurant-app-api.git"
+  },
+  "author": "mtw-programmer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mtw-programmer/restaurant-app-api/issues"
+  },
+  "homepage": "https://github.com/mtw-programmer/restaurant-app-api#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "helmet": "^7.0.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.3.1",
+    "morgan": "^1.10.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui": "^5.1.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1"
+  }
+}
