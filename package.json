@@ -22,6 +22,7 @@
     "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.3.1",
+    "path": "^0.12.7",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui": "^5.1.0",
     "typescript": "^5.1.6",
