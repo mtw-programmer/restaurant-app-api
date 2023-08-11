@@ -1,0 +1,39 @@
+components:
+  schemas:
+    Product:
+      type: object
+      required:
+       - title
+       - img
+       - description
+       - price
+      properties:
+        _id:
+          type: string
+          example: 64d656374666f5e967e89856
+        title:
+          type: string
+          minLength: 1
+          maxLength: 30
+          required: true
+        img:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Path of the Product Image
+          required: true
+        description:
+          type: string
+          minLength: 1
+          maxLength: 1024
+          required: true
+        price:
+          type: number
+          minimum: 0.01
+          maximum: 9999999
+          description: Price of the Product in dollars
+          required: true
+        createdAt:
+          type: string
+          format: date-time
+          required: true

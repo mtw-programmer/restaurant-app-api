@@ -1,8 +1,12 @@
 import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
+import './services/db';
 import log from './utils/log';
 import config from './utils/config';
+
+import docs from './docs';
+import getProducts from './routes/getProducts';
 
 const app = express();
 
@@ -13,5 +17,9 @@ app.use(cors({
   credentials: true
 }));
 
+app.use(docs);
+
+app.use('/api/get-products', getProducts);
+
 const port = config.APP_PORT || 3001;
-app.listen(port, () => log.init({ label: 'Index', message: `App listening on port ${port}` }));
+export default app.listen(port, () => log.init({ label: 'Index', message: `App listening on port ${port}` }));

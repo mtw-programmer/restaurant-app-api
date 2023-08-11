@@ -1,4 +1,4 @@
-import log from './log';
+import log from '../log';
 
 interface LogError { label: string; message: string };
 
