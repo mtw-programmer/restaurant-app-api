@@ -3,7 +3,7 @@ import Product from './Product';
 
 import ProductInterface from '../interfaces/Product';
 
-const arrayLimit = (val:ProductInterface[]) => val.length && val.length <= 3;
+const arrayLimit = (val:ProductInterface[]):Boolean => !!(val.length && val.length <= 3);
 
 const schema = new mongoose.Schema({
   items: {
