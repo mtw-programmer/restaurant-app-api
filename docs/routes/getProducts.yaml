@@ -1,0 +1,25 @@
+/api/get-products:
+  get:
+    summary: Returns all products
+    tags: [Product]
+    responses:
+      200:
+        description: Successfully returned products
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                products:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Product'
+      500:
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
