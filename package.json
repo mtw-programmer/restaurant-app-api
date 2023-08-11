@@ -28,7 +28,7 @@
     "path": "^0.12.7",
     "supertest": "^6.3.3",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui": "^5.1.0",
+    "swagger-ui-express": "^5.0.0",
     "ts-jest": "^29.1.1",
     "typescript": "^5.1.6",
     "winston": "^3.10.0"
