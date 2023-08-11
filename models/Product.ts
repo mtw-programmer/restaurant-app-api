@@ -24,6 +24,10 @@ const schema = new mongoose.Schema({
     min: 0.01,
     max: 9999999,
     required: true
+  },
+  __v: {
+    type: Number,
+    select: false
   }
 });
 
