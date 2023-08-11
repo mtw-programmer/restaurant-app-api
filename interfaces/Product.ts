@@ -1,6 +1,6 @@
-import { ObjectId } from 'mongoose';
+import { ObjectId, Document } from 'mongoose';
 
-export default interface Product {
+export default interface Product extends Document {
   _id: ObjectId;
   title: string;
   img: string;
