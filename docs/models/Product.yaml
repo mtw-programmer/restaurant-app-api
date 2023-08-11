@@ -29,8 +29,8 @@ components:
           required: true
         price:
           type: number
-          min: 0.01
-          max: 9999999
+          minimum: 0.01
+          maximum: 9999999
           description: Price of the Product in dollars
           required: true
         createdAt:
