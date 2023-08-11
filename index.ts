@@ -19,4 +19,4 @@ app.use(cors({
 app.use('/api/get-products', getProducts);
 
 const port = config.APP_PORT || 3001;
-app.listen(port, () => log.init({ label: 'Index', message: `App listening on port ${port}` }));
+export default app.listen(port, () => log.init({ label: 'Index', message: `App listening on port ${port}` }));
