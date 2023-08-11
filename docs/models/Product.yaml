@@ -9,30 +9,30 @@ components:
        - price
       properties:
         _id:
-         type: string
+          type: string
         title:
-         type: string
-         minLength: 1
-         maxLength: 30
-         required: true
+          type: string
+          minLength: 1
+          maxLength: 30
+          required: true
         img:
-         type: string
-         minLength: 1
-         maxLength: 128
-         description: Path of the Product Image
-         required: true
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Path of the Product Image
+          required: true
         description:
-         type: string
-         minLength: 1
-         maxLength: 1024
-         required: true
+          type: string
+          minLength: 1
+          maxLength: 1024
+          required: true
         price:
-         type: number
-         min: 0.01
-         max: 9999999
-         description: Price of the Product in dollars
-         required: true
+          type: number
+          min: 0.01
+          max: 9999999
+          description: Price of the Product in dollars
+          required: true
         createdAt:
-         type: string
-         format: date-time
-         required: true
+          type: string
+          format: date-time
+          required: true
