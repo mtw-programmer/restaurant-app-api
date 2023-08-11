@@ -1,22 +1,22 @@
 import dotenv from 'dotenv';
 import path from 'path';
 import log from '../utils/log';
-import exit from '../utils/exit';
+import exit from './errorHandling/exit';
 
-let config:any = {};
+const config = process.env;
 
 try {
-  if (!process.env.NODE_ENV) exit({ label: 'Config', message: `Environment variable NODE_ENV is not set!` });
+  if (!config.NODE_ENV) exit({ label: 'Config', message: `Environment variable NODE_ENV is not set!` });
 
-  const NODE_ENV = process.env.NODE_ENV;
+  const NODE_ENV = config.NODE_ENV;
   dotenv.config({ path: path.resolve(__dirname, `../config/${NODE_ENV}.env`) });
 
-  const properties = ['APP_PORT', 'REQ_DOMAIN'];
+  const properties = ['APP_PORT', 'REQ_DOMAIN', 'DB_HOST', 'DB_NAME', 'DB_PORT'];
 
   properties.forEach((property:string) => {
     !process.env.hasOwnProperty(property)
       ? exit({ label: 'Config', message: `Environment variable ${property} is not set!` })
-      : config.property = eval(`process.env.${property}`);
+      : config.property = eval(`config.${property}`);
   });
 
   log.init({ label: 'Config', message: 'Config successfully initialized!' });
