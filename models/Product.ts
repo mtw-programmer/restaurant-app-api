@@ -28,6 +28,10 @@ const schema = new mongoose.Schema({
   __v: {
     type: Number,
     select: false
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
   }
 });
 
