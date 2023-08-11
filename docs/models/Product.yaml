@@ -10,6 +10,7 @@ components:
       properties:
         _id:
           type: string
+          example: 64d656374666f5e967e89856
         title:
           type: string
           minLength: 1
