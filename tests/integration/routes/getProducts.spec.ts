@@ -35,7 +35,7 @@ describe('GET /api/get-products', () => {
     server.close();
   });
 
-  it('should return all products (without __v property)', async () => {
+  it('should return all products (without __v property and with createdAt property)', async () => {
     const res = await exec();
     expect(res.body.products[0]).toMatchObject(
       {
@@ -53,8 +53,12 @@ describe('GET /api/get-products', () => {
         price: 21
       }
     );
+
     expect(res.body.products[0].__v).not.toBeDefined();
     expect(res.body.products[1].__v).not.toBeDefined();
+    
+    expect(res.body.products[0].createdAt).toBeDefined();
+    expect(res.body.products[1].createdAt).toBeDefined();
   });
 
   it('should return an empty array when no products in db', async () => {
