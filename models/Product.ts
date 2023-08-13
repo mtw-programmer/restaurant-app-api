@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
+import Product from '../interfaces/Product';
 
-const schema = new mongoose.Schema({
+const schema = new mongoose.Schema<Product>({
   title: {
     type: String,
     minLength: 1,
@@ -36,4 +37,4 @@ const schema = new mongoose.Schema({
   }
 });
 
-export default mongoose.model('Product', schema);
+export default mongoose.model<Product>('Product', schema);
