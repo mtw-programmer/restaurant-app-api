@@ -90,7 +90,7 @@ describe('GET /api/get-special-offers', () => {
     expect(res.body.offers[1].createdAt).toBeDefined();
   });
 
-  it('should return an empty array when no products in db', async () => {
+  it('should return an empty array when no offers in db', async () => {
     clearDB();
     const res = await exec();
     expect(res.body.offers.length).toBe(0);
