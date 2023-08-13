@@ -1,0 +1,25 @@
+/api/get-special-offers:
+  get:
+    summary: Returns all Special Offers
+    tags: [Offer]
+    responses:
+      200:
+        description: Successfully returned offers
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                offers:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Offer'
+      500:
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
