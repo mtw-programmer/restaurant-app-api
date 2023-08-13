@@ -9,7 +9,7 @@ const timezone = () => {
   return `(${new Date().toLocaleString('pl', {
       timeZone: process.env.TZ ? process.env.TZ : 'Europe/Warsaw',
   })})`;
-}
+};
 
 const logFormat = printf(({timestamp, level, label, message}) => {
   return `[${level.toUpperCase()}] ${timestamp}: [${label}] - ${message}`;
