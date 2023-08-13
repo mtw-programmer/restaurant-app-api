@@ -8,4 +8,4 @@ export default interface Product extends Document {
   price: number;
   expires: Date;
   createdAt: Date;
-};
+}
