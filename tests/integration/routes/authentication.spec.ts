@@ -66,6 +66,10 @@ describe('POST /api/authentication', () => {
     
     const token = res.header['x-auth-token'];
 
-    expect(jwt.verify(token, config.TOKEN_SECRET)).toBeTruthy();
+    const userId = jwt.verify(token, config.TOKEN_SECRET);
+
+    const result = await Admin.findOne({ _id: userId }).select('_id');
+
+    expect(userId).toEqual(`${result._id}`);
   });
 });
