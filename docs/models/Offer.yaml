@@ -1,0 +1,36 @@
+components:
+  schemas:
+    Offer:
+      type: object
+      required:
+       - items
+       - price
+       - expires
+      properties:
+        _id:
+          type: string
+          example: 64d656374666f5e967e89856
+        items:
+          type: array
+          minItems: 1
+          maxItems: 3
+          items:
+            type: string
+            description: ID of Products in Offer
+            required: true
+            example: 64d656374666f5e967e89856
+        price:
+          type: number
+          minimum: 0.01
+          maximum: 9999999
+          description: Price of the Offer in dollars
+          required: true
+        expires:
+          type: string
+          format: date-time
+          description: Date and time when Offer expires
+          required: true
+        createdAt:
+          type: string
+          format: date-time
+          required: true
