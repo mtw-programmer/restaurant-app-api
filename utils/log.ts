@@ -38,7 +38,7 @@ const request = winston.createLogger({
   ),
   transports: [
     new (winston.transports.File)({ 
-      filename: `log/request.log`, 
+      filename: 'log/request.log', 
       level: 'request',
       handleExceptions: true,
       handleRejections: true,
@@ -56,7 +56,7 @@ const info = winston.createLogger({
     logFormat,
   ),
   transports: [
-    new (winston.transports.File)({ filename: `log/info.log`, level: 'info'}),
+    new (winston.transports.File)({ filename: 'log/info.log', level: 'info'}),
     new (winston.transports.Console)({ level: 'info' }),
   ]
 });
@@ -84,7 +84,7 @@ const warn = winston.createLogger({
   ),
   transports: [
     new (winston.transports.File)({ 
-      filename: `log/warn.log`, 
+      filename: 'log/warn.log', 
       level: 'warn',
       handleExceptions: true,
       handleRejections: true,
@@ -108,7 +108,7 @@ const error = winston.createLogger({
   ),
   transports: [
     new (winston.transports.File)({ 
-      filename: `log/error.log`, 
+      filename: 'log/error.log', 
       level: 'error',
       handleExceptions: true,
       handleRejections: true,

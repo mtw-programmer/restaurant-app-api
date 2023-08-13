@@ -6,7 +6,7 @@ import exit from './errorHandling/exit';
 const config = process.env;
 
 try {
-  if (!config.NODE_ENV) exit({ label: 'Config', message: `Environment variable NODE_ENV is not set!` });
+  if (!config.NODE_ENV) exit({ label: 'Config', message: 'Environment variable NODE_ENV is not set!' });
 
   const NODE_ENV = config.NODE_ENV;
   dotenv.config({ path: path.resolve(__dirname, `../config/${NODE_ENV}.env`) });
