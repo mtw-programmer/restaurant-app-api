@@ -1,0 +1,28 @@
+components:
+  schemas:
+    Admin:
+      type: object
+      required:
+       - username
+       - email
+       - password
+      properties:
+        _id:
+          type: string
+          example: 64d656374666f5e967e89856
+        username:
+          type: string
+          minLength: 5
+          maxLength: 70
+          required: true
+        email:
+          type: string
+          minLength: 5
+          maxLength: 70
+          required: true
+        password:
+          type: string
+          minLength: 8
+          maxLength: 1024
+          required: true
+          description: Maximum length of the `password` is 70 but because of password hashing maxLength is set up to 1024
