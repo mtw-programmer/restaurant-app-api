@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 
-import ProductInterface from '../interfaces/Product';
+import Product from '../interfaces/Product';
 import Offer from '../interfaces/Offer';
 
-const arrayLimit = (val:ProductInterface[]):boolean => !!(val.length && val.length <= 3);
+const arrayLimit = (val:Product[]):boolean => !!(val.length && val.length <= 3);
 
 const schema = new mongoose.Schema<Offer>({
   items: {
