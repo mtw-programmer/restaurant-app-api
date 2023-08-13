@@ -14,7 +14,7 @@ try {
   const properties = ['APP_PORT', 'REQ_DOMAIN', 'DB_HOST', 'DB_NAME', 'DB_PORT', 'SERVER_DOMAIN'];
 
   properties.forEach((property:string) => {
-    !process.env.hasOwnProperty(property)
+    !Object.prototype.hasOwnProperty.call(process.env, property)
       ? exit({ label: 'Config', message: `Environment variable ${property} is not set!` })
       : config.property = eval(`config.${property}`);
   });
