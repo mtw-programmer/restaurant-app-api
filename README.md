@@ -66,4 +66,4 @@ $ npm run test
 $ npm run dev
 ```
 
-- [http://localhost:3002/docs](http://localhost:3002/docs)
+- [URL: {SERVER_DOMAIN}/docs](http://localhost:3001/docs)
