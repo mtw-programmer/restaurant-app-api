@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import Product from './Product';
 
 import ProductInterface from '../interfaces/Product';
 
@@ -7,7 +6,8 @@ const arrayLimit = (val:ProductInterface[]):Boolean => !!(val.length && val.leng
 
 const schema = new mongoose.Schema({
   items: {
-    type: [Product],
+    type: [mongoose.Types.ObjectId],
+    ref: 'Product',
     validate: [arrayLimit, '{PATH} has to have at least one item and exceeds the limit of 3'],
     required: true
   },
