@@ -12,7 +12,7 @@ export default async function (req:Request, res:Response, next:NextFunction) {
     if (!token)
       return res.status(401).json({ msg: 'Access denied! Please, log in!' });
 
-    jwt.verify(token, config.TOKEN_SECRET, async (err:Error, userId:any) => {
+    jwt.verify(token, config.TOKEN_SECRET, async (err:Error, userId) => {
       if (err) return res.status(400).json({ msg: 'Invalid token!' });
 
       if (!userId)
