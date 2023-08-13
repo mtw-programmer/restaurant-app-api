@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { ObjectId } from 'mongoose';
+import { isValidObjectId } from 'mongoose';
 import jwt from 'jsonwebtoken';
 import config from '../utils/config';
 import Admin from '../models/Admin';
@@ -9,16 +9,17 @@ export default async function (req:Request, res:Response, next:NextFunction) {
   try {
     const token = req.headers['x-auth-token'];
 
-    if (!token) {
+    if (!token)
       return res.status(401).json({ msg: 'Access denied! Please, log in!' });
-    }
 
-    jwt.verify(token, config.TOKEN_SECRET, async (err:Error, userId:ObjectId) => {
+    jwt.verify(token, config.TOKEN_SECRET, async (err:Error, userId:any) => {
       if (err) return res.status(400).json({ msg: 'Invalid token!' });
 
-      if (!userId) {
+      if (!userId)
         return res.status(401).json({ msg: 'Access denied! Please, log in!' });
-      }
+
+      if (!isValidObjectId(userId))
+        return res.status(400).json({ msg: 'Invalid token!' });
      
       if (!await Admin.exists({ _id: userId }))
         return res.status(400).json({ msg: 'Invalid token!' });
