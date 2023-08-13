@@ -1,0 +1,56 @@
+/api/authentication:
+  post:
+    summary: Authentication to Dashboard
+    tags: [Dashboard]
+    requestBody:
+      description: Administrator credentials
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                minLength: 5
+                maxLength: 70
+                required: true
+              password:
+                type: string
+                minLength: 5
+                maxLength: 70
+                required: true
+    responses:
+      200:
+        description: Successfully logged in
+        headers:
+          x-auth-token:
+            type: string
+            description: JWT Authentication token
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                  example: Successfully logged in!
+      400:
+        description: Invalid credentials
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                  example: Invalid username or password!
+      500:
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string

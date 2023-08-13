@@ -9,7 +9,7 @@ router.get('/', async (_req:Request, res:Response) => {
     const products = await Product.find();
     return res.json({ products });
   } catch (ex) {
-    errorHandle(res, ex);
+    errorHandle('Get Products', res, ex);
   }
 });
 

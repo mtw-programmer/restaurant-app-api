@@ -41,6 +41,7 @@ $ cd config
 - DB_NAME - database name for our app
 - DB_PORT - database port
 - SERVER_DOMAIN - our application domain with port
+- TOKEN_SECRET - secret for JWT authentication
 
 ## run application in development mode
 

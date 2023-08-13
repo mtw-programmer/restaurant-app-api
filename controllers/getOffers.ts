@@ -9,7 +9,7 @@ router.get('/', async (_req:Request, res:Response) => {
     const offers = await Offer.find().populate('items');
     return res.json({ offers });
   } catch (ex) {
-    errorHandle(res, ex);
+    errorHandle('Get Offers', res, ex);
   }
 });
 
