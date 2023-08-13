@@ -6,8 +6,7 @@ import log from './utils/log';
 import config from './utils/config';
 
 import docs from './docs';
-import getProducts from './routes/getProducts';
-import getOffers from './routes/getOffers';
+import routes from './routes';
 
 const app = express();
 
@@ -18,10 +17,8 @@ app.use(cors({
   credentials: true
 }));
 
+app.use('/api', routes);
 app.use(docs);
-
-app.use('/api/get-products', getProducts);
-app.use('/api/get-special-offers', getOffers);
 
 const port = config.APP_PORT || 3001;
 export default app.listen(port, () => log.init({ label: 'Index', message: `App listening on port ${port}` }));
