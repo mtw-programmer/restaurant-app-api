@@ -14,7 +14,8 @@ app.use(express.json());
 app.use(helmet());
 app.use(cors({
   origin: config.REQ_DOMAIN,
-  credentials: true
+  credentials: true,
+  exposedHeaders: 'x-auth-token'
 }));
 
 app.use('/api', routes);
