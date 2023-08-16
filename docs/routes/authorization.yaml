@@ -1,0 +1,53 @@
+/api/verify-token:
+  post:
+    summary: Authorization to Dashboard
+    tags: [Dashboard]
+    parameters:
+      - name: x-auth-token
+        in: header
+        type: string
+        description: JWT Authentication token
+        required: true
+    requestBody:
+      description: Administrator token
+      required: true
+    responses:
+      200:
+        description: Successfully verified token
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                  example: Successfully logged in!
+      400:
+        description: Invalid token
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                  example: Invalid token!
+      401:
+        description: No token provided!
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                  example: Access denied! Please, log in.
+      500:
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
