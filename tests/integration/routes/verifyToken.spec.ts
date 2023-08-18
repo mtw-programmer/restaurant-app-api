@@ -40,7 +40,7 @@ describe('POST /api/verify-token', () => {
   });
   
   it('should return 400 when token does not store valid admin _id', async () => {
-    const res = await exec('eyJhbGciOiJIUzI1NiJ9.VGVzdA.JiVz0ilR7kLM4oUEK3ZZcrfgZIGBiUurVzQ2XjcXirI');
+    const res = await exec('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJpYXQiOjE2OTIzOTM1MzEsImV4cCI6MTY5MjM5NzEzMX0.BiykhELT1JaWUL0Rg0qfO8YLRfQ8SfmpLinPxz4qtI8');
     expect(res.status).toBe(400);
   });
   

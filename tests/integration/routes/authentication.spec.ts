@@ -64,12 +64,14 @@ describe('POST /api/authentication', () => {
     const res = await exec({ username: 'admin', password: '1234567890' });
     expect(res.status).toBe(200);
     
-    const token = res.header['x-auth-token'];
+    const token = res.headers['x-auth-token'];
 
-    const userId = jwt.verify(token, config.TOKEN_SECRET);
+    jwt.verify(token, config.TOKEN_SECRET, async (_err, decoded) => {
+      const { id } = decoded;
 
-    const result = await Admin.findOne({ _id: userId }).select('_id');
+      const result = await Admin.findOne({ _id: id }).select('_id');
 
-    expect(userId).toEqual(`${result._id}`);
+      expect(id).toEqual(`${result._id}`);
+    });
   });
 });
