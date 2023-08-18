@@ -12,16 +12,18 @@ export default async function (req:Request, res:Response, next:NextFunction) {
     if (!token)
       return res.status(401).json({ msg: 'Access denied! Please, log in!' });
 
-    jwt.verify(token, config.TOKEN_SECRET, async (err:Error, userId) => {
+    jwt.verify(token, config.TOKEN_SECRET, async (err:Error, decoded) => {
       if (err) return res.status(400).json({ msg: 'Invalid token!' });
 
-      if (!userId)
+      const { id } = decoded;
+
+      if (!id)
         return res.status(401).json({ msg: 'Access denied! Please, log in!' });
 
-      if (!isValidObjectId(userId))
+      if (!isValidObjectId(id))
         return res.status(400).json({ msg: 'Invalid token!' });
      
-      if (!await Admin.exists({ _id: userId }))
+      if (!await Admin.exists({ _id: id }))
         return res.status(400).json({ msg: 'Invalid token!' });
   
       next();

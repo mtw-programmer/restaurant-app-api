@@ -42,6 +42,7 @@ $ cd config
 - DB_PORT - database port
 - SERVER_DOMAIN - our application domain with port
 - TOKEN_SECRET - secret for JWT authentication
+- TOKEN_EXPIRATION - JWT expiresIn property
 
 ## run application in development mode
 
