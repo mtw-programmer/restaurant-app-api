@@ -14,7 +14,7 @@
      "sourceMap": true
   },
   "ts-node": {
-   "esm": true
+   "esm": false
   },
   "include": ["*.ts"],
 }
