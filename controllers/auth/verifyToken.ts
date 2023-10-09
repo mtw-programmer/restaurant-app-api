@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import errorHandle from '../utils/errorHandling/router';
+import errorHandle from '../../utils/errorHandling/router';
 
 const router = Router();
 

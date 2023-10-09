@@ -1,9 +1,8 @@
 import request from 'supertest';
-import server from '../../../index';
+import server from '../../../../index';
 
-import Admin from '../../../models/Admin';
-import config from '../../../utils/config';
-import clearDB from '../helpers/clearDB';
+import Admin from '../../../../models/Admin';
+import clearDB from '../../helpers/clearDB';
 
 describe('POST /api/verify-token', () => {
   beforeAll(() => clearDB());

@@ -1,10 +1,10 @@
 import request from 'supertest';
-import server from '../../../index';
+import server from '../../../../index';
 import jwt from 'jsonwebtoken';
 
-import Admin from '../../../models/Admin';
-import config from '../../../utils/config';
-import clearDB from '../helpers/clearDB';
+import Admin from '../../../../models/Admin';
+import config from '../../../../utils/config';
+import clearDB from '../../helpers/clearDB';
 
 describe('POST /api/authentication', () => {
   beforeAll(() => clearDB());

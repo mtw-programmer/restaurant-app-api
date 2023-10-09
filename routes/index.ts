@@ -1,10 +1,10 @@
 import { Router } from 'express';
 
-import getProducts from './getProducts';
-import getOffers from './getOffers';
-import authentication from './authentication';
+import getProducts from './products/getProducts';
+import getOffers from './offers/getOffers';
+import authentication from './auth/authentication';
 import authorization from '../middleware/authorization';
-import verifyToken from './verifyToken';
+import verifyToken from './auth/verifyToken';
 
 const router = Router();
 

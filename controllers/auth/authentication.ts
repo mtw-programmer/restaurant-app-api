@@ -1,10 +1,10 @@
 import { Router, Request, Response } from 'express';
-import Admin from '../models/Admin';
+import Admin from '../../models/Admin';
 import bcrypt from 'bcrypt';
 
-import errorHandle from '../utils/errorHandling/router';
-import validate from '../validate/authentication';
-import generateAuthToken from '../utils/generateAuthToken';
+import errorHandle from '../../utils/errorHandling/router';
+import validate from '../../validate/authentication';
+import generateAuthToken from '../../utils/generateAuthToken';
 
 const router = Router();
 
