@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
-import errorHandle from '../utils/errorHandling/router';
-import Product from '../models/Product';
+import errorHandle from '../../utils/errorHandling/router';
+import Product from '../../models/Product';
 
 const router = Router();
 

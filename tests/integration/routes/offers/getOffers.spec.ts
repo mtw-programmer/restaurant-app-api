@@ -1,8 +1,8 @@
 import request from 'supertest';
-import server from '../../../index';
-import Product from '../../../models/Product';
-import Offer from '../../../models/Offer';
-import clearDB from '../helpers/clearDB';
+import server from '../../../../index';
+import Product from '../../../../models/Product';
+import Offer from '../../../../models/Offer';
+import clearDB from '../../helpers/clearDB';
 
 describe('GET /api/get-special-offers', () => {
   beforeAll(() => clearDB());

@@ -1,7 +1,7 @@
 import request from 'supertest';
-import server from '../../../index';
-import Product from '../../../models/Product';
-import clearDB from '../helpers/clearDB';
+import server from '../../../../index';
+import Product from '../../../../models/Product';
+import clearDB from '../../helpers/clearDB';
 
 describe('GET /api/get-products', () => {
   beforeAll(() => clearDB());
