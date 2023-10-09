@@ -53,21 +53,25 @@ describe('PUT /api/dashboard/add-product', () => {
   it('should return 401 when no token provided', async () => {
     const res = await request(server).post('/api/verify-token').send();
     expect(res.status).toBe(401);
+    expect(res.body.msg).toBeDefined();
   });
   
   it('should return 401 when token is not a string type', async () => {
     const res = await exec({}, goodProduct);
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
 
   it('should return 401 when token is not valid', async () => {
     const res = await exec('1', goodProduct);
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
   
   it('should return 400 when token does not store valid admin _id', async () => {
     const res = await exec('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJpYXQiOjE2OTIzOTM1MzEsImV4cCI6MTY5MjM5NzEzMX0.BiykhELT1JaWUL0Rg0qfO8YLRfQ8SfmpLinPxz4qtI8', goodProduct);
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
 
   it('should return 400 when title is not provided', async () => {
@@ -75,6 +79,7 @@ describe('PUT /api/dashboard/add-product', () => {
     const res = await exec(token, product);
     
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
   
   it('should return 400 when img is not provided', async () => {
@@ -82,6 +87,7 @@ describe('PUT /api/dashboard/add-product', () => {
     const res = await exec(token, product);
     
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
   
   it('should return 400 when description is not provided', async () => {
@@ -89,6 +95,7 @@ describe('PUT /api/dashboard/add-product', () => {
     const res = await exec(token, product);
     
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
   
   it('should return 400 when price is not provided', async () => {
@@ -96,6 +103,7 @@ describe('PUT /api/dashboard/add-product', () => {
     const res = await exec(token, product);
     
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
 
   it('should return 400 when title is not a string type', async () => {
@@ -105,6 +113,7 @@ describe('PUT /api/dashboard/add-product', () => {
     const res = await exec(token, product);
     
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
 
   it('should return 400 when title is less than 1 char long', async () => {
@@ -114,6 +123,7 @@ describe('PUT /api/dashboard/add-product', () => {
     const res = await exec(token, product);
     
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
 
   it('should return 400 when title is longer than 30 chars long', async () => {
@@ -123,6 +133,7 @@ describe('PUT /api/dashboard/add-product', () => {
     const res = await exec(token, product);
     
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
 
   it('should return 400 when img is not a string type', async () => {
@@ -132,6 +143,7 @@ describe('PUT /api/dashboard/add-product', () => {
     const res = await exec(token, product);
     
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
 
   it('should return 400 when img is not a valid path', async () => {
@@ -141,6 +153,7 @@ describe('PUT /api/dashboard/add-product', () => {
     const res = await exec(token, product);
     
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
 
   it('should return 400 when img does not have an accepted extension (.jpg, .png, .gif)', async () => {
@@ -150,6 +163,7 @@ describe('PUT /api/dashboard/add-product', () => {
     const res = await exec(token, product);
     
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
 
   it('should return 400 when img is heavier than 7MB', async () => {
@@ -159,6 +173,7 @@ describe('PUT /api/dashboard/add-product', () => {
     const res = await exec(token, product);
     
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
 
   it('should return 400 when img is not a string type', async () => {
@@ -168,6 +183,7 @@ describe('PUT /api/dashboard/add-product', () => {
     const res = await exec(token, product);
     
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
   
   it('should return 400 when description is not a string type', async () => {
@@ -177,6 +193,7 @@ describe('PUT /api/dashboard/add-product', () => {
     const res = await exec(token, product);
     
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
 
   it('should return 400 when description is less than 1 char long', async () => {
@@ -186,6 +203,7 @@ describe('PUT /api/dashboard/add-product', () => {
     const res = await exec(token, product);
     
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
 
   it('should return 400 when description is longer than 1024 chars long', async () => {
@@ -195,6 +213,7 @@ describe('PUT /api/dashboard/add-product', () => {
     const res = await exec(token, product);
     
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
 
   it('should return 400 when price is not a number type', async () => {
@@ -204,6 +223,7 @@ describe('PUT /api/dashboard/add-product', () => {
     const res = await exec(token, product);
     
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
 
   it('should return 400 when price is less than 0.01', async () => {
@@ -213,6 +233,7 @@ describe('PUT /api/dashboard/add-product', () => {
     const res = await exec(token, product);
     
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
 
   it('should return 400 when price is more than 9999999', async () => {
@@ -222,12 +243,14 @@ describe('PUT /api/dashboard/add-product', () => {
     const res = await exec(token, product);
     
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
 
   it('should return 200 and add the product when everything is okay', async () => {
     const res = await exec(token, goodProduct);
 
     expect(res.status).toBe(200);
+    expect(res.body.msg).toBeDefined();
 
     const product = await Product.findOne({ title: 'P2' });
 
