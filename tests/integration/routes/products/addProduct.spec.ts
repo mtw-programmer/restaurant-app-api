@@ -13,11 +13,13 @@ describe('PUT /api/dashboard/add-product', () => {
       .put('/api/dashboard/add-product')
       .set('x-auth-token', token)
       .attach('img', body.img)
-      .send(body);
+      .field('title', body.title)
+      .field('description', body.description)
+      .field('price', body.price);
 
   const goodProduct = {
     title: 'P2',
-    img: '../../helpers/media/test.png',
+    img: 'tests/integration/helpers/media/test.png',
     description: 'D2',
     price: 11.99
   };
@@ -51,13 +53,20 @@ describe('PUT /api/dashboard/add-product', () => {
   });
 
   it('should return 401 when no token provided', async () => {
-    const res = await request(server).post('/api/verify-token').send();
+    const res = await
+      request(server)
+        .put('/api/dashboard/add-product')
+        .attach('img', goodProduct.img)
+        .field('title', goodProduct.title)
+        .field('description', goodProduct.description)
+        .field('price', goodProduct.price);
+    
     expect(res.status).toBe(401);
     expect(res.body.msg).toBeDefined();
   });
   
   it('should return 401 when token is not a string type', async () => {
-    const res = await exec({}, goodProduct);
+    const res = await exec({ msg: 'Do not throw pls ;)' }, goodProduct);
     expect(res.status).toBe(400);
     expect(res.body.msg).toBeDefined();
   });
@@ -75,32 +84,52 @@ describe('PUT /api/dashboard/add-product', () => {
   });
 
   it('should return 400 when title is not provided', async () => {
-    const product = _.omit('title', goodProduct);
-    const res = await exec(token, product);
+    const res = await
+      request(server)
+      .put('/api/dashboard/add-product')
+      .attach('img', goodProduct.img)
+      .field('description', goodProduct.description)
+      .field('price', goodProduct.price)
+      .set('x-auth-token', token);
     
     expect(res.status).toBe(400);
     expect(res.body.msg).toBeDefined();
   });
   
   it('should return 400 when img is not provided', async () => {
-    const product = _.omit('img', goodProduct);
-    const res = await exec(token, product);
+    const res = await
+      request(server)
+        .put('/api/dashboard/add-product')
+        .field('title', goodProduct.title)
+        .field('description', goodProduct.description)
+        .field('price', goodProduct.price)
+        .set('x-auth-token', token);
     
     expect(res.status).toBe(400);
     expect(res.body.msg).toBeDefined();
   });
   
   it('should return 400 when description is not provided', async () => {
-    const product = _.omit('description', goodProduct);
-    const res = await exec(token, product);
+    const res = await
+      request(server)
+        .put('/api/dashboard/add-product')
+        .attach('img', goodProduct.img)
+        .field('title', goodProduct.title)
+        .field('price', goodProduct.price)
+        .set('x-auth-token', token);
     
     expect(res.status).toBe(400);
     expect(res.body.msg).toBeDefined();
   });
   
   it('should return 400 when price is not provided', async () => {
-    const product = _.omit('price', goodProduct);
-    const res = await exec(token, product);
+    const res = await
+      request(server)
+        .put('/api/dashboard/add-product')
+        .attach('img', goodProduct.img)
+        .field('title', goodProduct.title)
+        .field('description', goodProduct.description)
+        .set('x-auth-token', token);
     
     expect(res.status).toBe(400);
     expect(res.body.msg).toBeDefined();
@@ -138,7 +167,7 @@ describe('PUT /api/dashboard/add-product', () => {
 
   it('should return 400 when img is not a string type', async () => {
     const product:any = goodProduct;
-    product.img = {};
+    product.img = { msg: 'Do not throw pls ;)' };
 
     const res = await exec(token, product);
     
@@ -158,7 +187,7 @@ describe('PUT /api/dashboard/add-product', () => {
 
   it('should return 400 when img does not have an accepted extension (.jpg, .png, .gif)', async () => {
     const product:any = goodProduct;
-    product.img = '../../helpers/media/test.txt';
+    product.img = 'tests/integration/helpers/media/test.txt';
 
     const res = await exec(token, product);
     
@@ -168,7 +197,7 @@ describe('PUT /api/dashboard/add-product', () => {
 
   it('should return 400 when img is heavier than 7MB', async () => {
     const product:any = goodProduct;
-    product.img = '../../helpers/media/big.jpg';
+    product.img = 'tests/integration/helpers/media/big.jpg';
 
     const res = await exec(token, product);
     
@@ -178,7 +207,7 @@ describe('PUT /api/dashboard/add-product', () => {
 
   it('should return 400 when img is not a string type', async () => {
     const product:any = goodProduct;
-    product.img = {};
+    product.img = { msg: 'Do not throw pls ;)' };
 
     const res = await exec(token, product);
     
@@ -188,7 +217,7 @@ describe('PUT /api/dashboard/add-product', () => {
   
   it('should return 400 when description is not a string type', async () => {
     const product:any = goodProduct;
-    product.description = {};
+    product.description = { msg: 'Do not throw pls ;)' };
 
     const res = await exec(token, product);
     
