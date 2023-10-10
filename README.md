@@ -1,6 +1,6 @@
 # restaurant-app API
 
-API managment for [restarant-app](https://github.com/mtw-programmer/restaurant-app) project
+API allowing to manage restaurant infrastructure.
 
 ## set up
 
