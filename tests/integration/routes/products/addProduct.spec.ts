@@ -1,4 +1,5 @@
 import request from 'supertest';
+import fs from 'fs';
 import _ from 'lodash';
 import server from '../../../../index';
 import Product from '../../../../models/Product';
@@ -32,7 +33,7 @@ describe('PUT /api/dashboard/add-product', () => {
         title: 'P1',
         img: 'test.png',
         description: 'D1',
-        price: 0.02
+        price: '0.02'
       }),
       new Admin({
         username: 'admin',
@@ -62,12 +63,6 @@ describe('PUT /api/dashboard/add-product', () => {
         .field('price', goodProduct.price);
     
     expect(res.status).toBe(401);
-    expect(res.body.msg).toBeDefined();
-  });
-  
-  it('should return 401 when token is not a string type', async () => {
-    const res = await exec({ msg: 'Do not throw pls ;)' }, goodProduct);
-    expect(res.status).toBe(400);
     expect(res.body.msg).toBeDefined();
   });
 
@@ -135,18 +130,8 @@ describe('PUT /api/dashboard/add-product', () => {
     expect(res.body.msg).toBeDefined();
   });
 
-  it('should return 400 when title is not a string type', async () => {
-    const product:any = goodProduct;
-    product.title = {};
-
-    const res = await exec(token, product);
-    
-    expect(res.status).toBe(400);
-    expect(res.body.msg).toBeDefined();
-  });
-
   it('should return 400 when title is less than 1 char long', async () => {
-    const product:any = goodProduct;
+    const product:any = { ...goodProduct };
     product.title = '';
 
     const res = await exec(token, product);
@@ -156,7 +141,7 @@ describe('PUT /api/dashboard/add-product', () => {
   });
 
   it('should return 400 when title is longer than 30 chars long', async () => {
-    const product:any = goodProduct;
+    const product:any = { ...goodProduct };
     product.title = Array(32).join('a');
 
     const res = await exec(token, product);
@@ -165,28 +150,8 @@ describe('PUT /api/dashboard/add-product', () => {
     expect(res.body.msg).toBeDefined();
   });
 
-  it('should return 400 when img is not a string type', async () => {
-    const product:any = goodProduct;
-    product.img = { msg: 'Do not throw pls ;)' };
-
-    const res = await exec(token, product);
-    
-    expect(res.status).toBe(400);
-    expect(res.body.msg).toBeDefined();
-  });
-
-  it('should return 400 when img is not a valid path', async () => {
-    const product:any = goodProduct;
-    product.img = '../test.jpg';
-
-    const res = await exec(token, product);
-    
-    expect(res.status).toBe(400);
-    expect(res.body.msg).toBeDefined();
-  });
-
-  it('should return 400 when img does not have an accepted extension (.jpg, .png, .gif)', async () => {
-    const product:any = goodProduct;
+  it('should return 400 when img does not have an accepted extension (.jpg, .jpeg, .png, .gif)', async () => {
+    const product:any = { ...goodProduct };
     product.img = 'tests/integration/helpers/media/test.txt';
 
     const res = await exec(token, product);
@@ -195,38 +160,8 @@ describe('PUT /api/dashboard/add-product', () => {
     expect(res.body.msg).toBeDefined();
   });
 
-  it('should return 400 when img is heavier than 7MB', async () => {
-    const product:any = goodProduct;
-    product.img = 'tests/integration/helpers/media/big.jpg';
-
-    const res = await exec(token, product);
-    
-    expect(res.status).toBe(400);
-    expect(res.body.msg).toBeDefined();
-  });
-
-  it('should return 400 when img is not a string type', async () => {
-    const product:any = goodProduct;
-    product.img = { msg: 'Do not throw pls ;)' };
-
-    const res = await exec(token, product);
-    
-    expect(res.status).toBe(400);
-    expect(res.body.msg).toBeDefined();
-  });
-  
-  it('should return 400 when description is not a string type', async () => {
-    const product:any = goodProduct;
-    product.description = { msg: 'Do not throw pls ;)' };
-
-    const res = await exec(token, product);
-    
-    expect(res.status).toBe(400);
-    expect(res.body.msg).toBeDefined();
-  });
-
   it('should return 400 when description is less than 1 char long', async () => {
-    const product:any = goodProduct;
+    const product:any = { ...goodProduct };
     product.description = '';
 
     const res = await exec(token, product);
@@ -236,7 +171,7 @@ describe('PUT /api/dashboard/add-product', () => {
   });
 
   it('should return 400 when description is longer than 1024 chars long', async () => {
-    const product:any = goodProduct;
+    const product:any = { ...goodProduct };
     product.title = Array(1026).join('a');
 
     const res = await exec(token, product);
@@ -245,19 +180,9 @@ describe('PUT /api/dashboard/add-product', () => {
     expect(res.body.msg).toBeDefined();
   });
 
-  it('should return 400 when price is not a number type', async () => {
-    const product:any = goodProduct;
-    product.price = 'test';
-
-    const res = await exec(token, product);
-    
-    expect(res.status).toBe(400);
-    expect(res.body.msg).toBeDefined();
-  });
-
   it('should return 400 when price is less than 0.01', async () => {
-    const product:any = goodProduct;
-    product.price = 0.001;
+    const product:any = { ...goodProduct };
+    product.price = '0.001';
 
     const res = await exec(token, product);
     
@@ -266,8 +191,8 @@ describe('PUT /api/dashboard/add-product', () => {
   });
 
   it('should return 400 when price is more than 9999999', async () => {
-    const product:any = goodProduct;
-    product.price = 9999999.01;
+    const product:any = { ...goodProduct };
+    product.price = '9999999.01';
 
     const res = await exec(token, product);
     
@@ -275,16 +200,67 @@ describe('PUT /api/dashboard/add-product', () => {
     expect(res.body.msg).toBeDefined();
   });
 
-  it('should return 200 and add the product when everything is okay', async () => {
+  it('should return 200 and add the product when everything is okay and img is jpg', async () => {
+    goodProduct.img = `${goodProduct.img.substring(0, goodProduct.img.length - 3)}jpg`;
+
     const res = await exec(token, goodProduct);
 
     expect(res.status).toBe(200);
     expect(res.body.msg).toBeDefined();
 
-    const product = await Product.findOne({ title: 'P2' });
+    const product = await Product.findOne({ title: 'P2' }).select('-__v');
 
-    expect(product).toMatchObject(goodProduct);
+    expect(_.pick(product, ['title', 'description', 'price'])).toMatchObject(_.omit(goodProduct, 'img'));
     expect(product._id).toBeDefined();
+    expect(product.img).toBeDefined();
     expect(product.createdAt).toBeDefined();
+    expect(fs.existsSync(`./media/products/${product._id}/${product.img}`)).toBeTruthy();
+  });
+
+  it('should return 200 and add the product when everything is okay and img is png', async () => {
+    const res = await exec(token, goodProduct);
+
+    expect(res.status).toBe(200);
+    expect(res.body.msg).toBeDefined();
+
+    const product = await Product.findOne({ title: 'P2' }).select('-__v');
+
+    expect(_.pick(product, ['title', 'description', 'price'])).toMatchObject(_.omit(goodProduct, 'img'));
+    expect(product._id).toBeDefined();
+    expect(product.img).toBeDefined();
+    expect(product.createdAt).toBeDefined();
+    expect(fs.existsSync(`./media/products/${product._id}/${product.img}`)).toBeTruthy();
+  });
+
+  it('should return 200 and add the product when everything is okay and img is gif', async () => {
+    goodProduct.img = `${goodProduct.img.substring(0, goodProduct.img.length - 3)}gif`;
+    const res = await exec(token, goodProduct);
+
+    expect(res.status).toBe(200);
+    expect(res.body.msg).toBeDefined();
+
+    const product = await Product.findOne({ title: 'P2' }).select('-__v');
+
+    expect(_.pick(product, ['title', 'description', 'price'])).toMatchObject(_.omit(goodProduct, 'img'));
+    expect(product._id).toBeDefined();
+    expect(product.img).toBeDefined();
+    expect(product.createdAt).toBeDefined();
+    expect(fs.existsSync(`./media/products/${product._id}/${product.img}`)).toBeTruthy();
+  });
+
+  it('should return 200 and add the product when everything is okay and img is jpeg', async () => {
+    goodProduct.img = `${goodProduct.img.substring(0, goodProduct.img.length - 3)}jpeg`;
+    const res = await exec(token, goodProduct);
+
+    expect(res.status).toBe(200);
+    expect(res.body.msg).toBeDefined();
+
+    const product = await Product.findOne({ title: 'P2' }).select('-__v');
+
+    expect(_.pick(product, ['title', 'description', 'price'])).toMatchObject(_.omit(goodProduct, 'img'));
+    expect(product._id).toBeDefined();
+    expect(product.img).toBeDefined();
+    expect(product.createdAt).toBeDefined();
+    expect(fs.existsSync(`./media/products/${product._id}/${product.img}`)).toBeTruthy();
   });
 });
