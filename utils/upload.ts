@@ -1,24 +1,27 @@
-import { Request, Response } from 'express';
-import multer from 'multer';
+import { Request, RequestHandler, Response } from 'express';
+import multer, { FileFilterCallback } from 'multer';
 import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
 import path from 'path';
 
+type FileNameCallback = (error: Error | null, filename: string) => void;
+type DestinationCallback = (error: Error | null, destination: string) => void;
+
 const fileLimit = 7 * 1024 * 1024;
 
-export default (req: Request, res:Response, filePath: string) => 
+export default (req: Request, res:Response, filePath: string):RequestHandler => 
   multer({
     storage: multer.diskStorage({
-      destination: (_req, _file, cb) => {
+      destination: (_req:Request, _file:Express.Multer.File, cb:DestinationCallback):void => {
         fs.mkdirSync(filePath, { recursive: true });
         cb(null, filePath);
       },
-      filename: (_req, file, cb) => {
+      filename: (_req:Request, file:Express.Multer.File, cb:FileNameCallback):void => {
         cb(null, `${uuidv4()}${path.extname(file.originalname)}`);
       },
     }),
     limits: { fileSize: fileLimit },
-    fileFilter: (_req, file, cb) => {
+    fileFilter: (_req:Request, file:Express.Multer.File, cb:FileFilterCallback):void|Express.Response => {
       const fileFormats = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
 
       const fileSize = parseInt(req.headers['content-length']);
