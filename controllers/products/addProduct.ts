@@ -1,7 +1,6 @@
 import { Router, Request, Response, RequestHandler } from 'express';
 import { Types } from 'mongoose';
 import { MulterError } from 'multer';
-import path from 'path';
 import errorHandle from '../../utils/errorHandling/router';
 import uploadFile from '../../utils/upload';
 import validate from '../../validate/addProduct';
