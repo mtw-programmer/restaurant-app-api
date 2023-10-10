@@ -37,7 +37,7 @@ router.put('/', async (req:Request, res:Response) => {
 
     await product.save();
 
-    return res.json({ msg: 'Successfully added new product!' })
+    return res.json({ msg: 'Successfully added a new product!' })
   });
 });
 
