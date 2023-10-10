@@ -8,9 +8,6 @@
         type: string
         description: JWT Authentication token
         required: true
-    requestBody:
-      description: Administrator token
-      required: true
     responses:
       200:
         description: Successfully verified token
@@ -51,3 +48,4 @@
               properties:
                 msg:
                   type: string
+                  example: Something went wrong! Please, try again later.
