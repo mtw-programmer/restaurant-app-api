@@ -67,7 +67,7 @@ describe('DELETE /api/dashboard/delete-product/:id', () => {
   });
   
   it('should return 400 when token does not store valid admin _id', async () => {
-    const payload = { _id: new Types.ObjectId() };
+    const payload = { id: new Types.ObjectId() };
     const token = await jwt.sign(payload, config.TOKEN_SECRET);
     const res = await exec(token, productId);
     expect(res.status).toBe(400);
