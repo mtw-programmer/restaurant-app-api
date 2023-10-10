@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Router, Request, Response, RequestHandler } from 'express';
 import { Types } from 'mongoose';
 import { MulterError } from 'multer';
 import path from 'path';
@@ -8,10 +8,10 @@ import validate from '../../validate/addProduct';
 import Product from '../../models/Product';
 
 const router = Router();
-const id = new Types.ObjectId();
+const _id = new Types.ObjectId();
 
 router.put('/', async (req:Request, res:Response) => {
-  const upload = uploadFile(req, res, `./media/products/${id}`)
+  const upload = uploadFile(req, res, `./media/products/${_id}`)
   
   upload(req, res, async (err) => {
     if (req.file === undefined)
@@ -29,7 +29,7 @@ router.put('/', async (req:Request, res:Response) => {
     const { title, description, price } = req.body;
 
     const product = new Product({
-      id,
+      _id,
       title,
       img: req.file.filename,
       description,
