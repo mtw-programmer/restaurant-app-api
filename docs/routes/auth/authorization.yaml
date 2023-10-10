@@ -48,3 +48,4 @@
               properties:
                 msg:
                   type: string
+                  example: Something went wrong! Please, try again later.
