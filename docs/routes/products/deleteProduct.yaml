@@ -13,9 +13,6 @@
         type: string
         description: Product ID
         required: true
-    requestBody:
-          description: Administrator token and Product ID
-          required: true
     responses:
       200:
         description: Successfully removed a Product
