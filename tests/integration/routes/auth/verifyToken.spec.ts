@@ -26,21 +26,25 @@ describe('POST /api/verify-token', () => {
   it('should return 401 when no token provided', async () => {
     const res = await request(server).post('/api/verify-token').send();
     expect(res.status).toBe(401);
+    expect(res.body.msg).toBeDefined();
   });
   
   it('should return 401 when token is not a string type', async () => {
     const res = await exec({});
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
 
   it('should return 401 when token is not valid', async () => {
     const res = await exec('1');
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
   
   it('should return 400 when token does not store valid admin _id', async () => {
     const res = await exec('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJpYXQiOjE2OTIzOTM1MzEsImV4cCI6MTY5MjM5NzEzMX0.BiykhELT1JaWUL0Rg0qfO8YLRfQ8SfmpLinPxz4qtI8');
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
   
   it('should return 200 when token is valid and contain admin _id', async () => {

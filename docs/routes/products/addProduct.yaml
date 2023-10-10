@@ -1,0 +1,78 @@
+/api/dashboard/add-product:
+  put:
+    summary: Add a new Product
+    tags: [Dashboard]
+    parameters:
+      - name: x-auth-token
+        in: header
+        type: string
+        description: JWT Authentication token
+        required: true
+    requestBody:
+      description: New Product
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                minLength: 1
+                maxLength: 30
+                required: true
+              img:
+                type: file
+                required: true
+              description:
+                type: string
+                minLength: 1
+                maxLength: 1024
+                required: true
+              price:
+                type: string
+                minimum: 0.01
+                maximum: 9999999
+                required: true
+                description: Price of the Product in dollars
+    responses:
+      200:
+        description: Successfully added a new Product
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                  example: Successfully added new product!
+      400:
+        description: Bad Request (invalid data or token)
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                  example: No file provided!
+      401:
+        description: Access denied! No token provided.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                  example: Access denied! No token provided.
+      500:
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                  example: Something went wrong! Please, try again later.

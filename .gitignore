@@ -2,6 +2,7 @@
 node_modules
 log
 coverage
+media
 /dist
 
 # local env files

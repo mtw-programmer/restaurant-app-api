@@ -8,7 +8,7 @@ import swaggerJSDoc from 'swagger-jsdoc';
 
 const specs = swaggerJSDoc(options);
 
-const router = new Router();
+const router = Router();
 
 if (config.NODE_ENV === 'development') {
   router.use('/docs', swaggerUI.serve, swaggerUI.setup(specs));

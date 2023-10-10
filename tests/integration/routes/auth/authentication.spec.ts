@@ -28,41 +28,49 @@ describe('POST /api/authentication', () => {
   it('should return 400 when no request body', async () => {
     const res = await request(server).post('/api/authentication').send();
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
   
   it('should return 400 when username is not a string type', async () => {
     const res = await exec({ username: {}, password: '1234567890' });
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
   
   it('should return 400 when password is not a string type', async () => {
     const res = await exec({ username: 'admin', password: {} });
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
   
   it('should return 400 when no username given', async () => {
     const res = await exec({ password: '1234567890' });
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
   
   it('should return 400 when no password given', async () => {
     const res = await exec({ username: 'admin' });
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
   
   it('should return 400 when username is incorrect', async () => {
     const res = await exec({ username: 'admin1', password: '1234567890' });
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
   
   it('should return 400 when password is incorrect', async () => {
     const res = await exec({ username: 'admin', password: '123456789' });
     expect(res.status).toBe(400);
+    expect(res.body.msg).toBeDefined();
   });
   
   it('should return a valid jwt when credentials are correct', async () => {
     const res = await exec({ username: 'admin', password: '1234567890' });
     expect(res.status).toBe(200);
+    expect(res.body.msg).toBeDefined();
     
     const token = res.headers['x-auth-token'];
 
