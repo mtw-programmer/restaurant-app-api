@@ -6,11 +6,15 @@ import authentication from './auth/authentication';
 import authorization from '../middleware/authorization';
 import verifyToken from './auth/verifyToken';
 
+import addProduct from './products/addProduct';
+
 const router = Router();
 
 router.use('/get-products', getProducts);
 router.use('/get-special-offers', getOffers);
 router.use('/authentication', authentication);
 router.use('/verify-token', [authorization, verifyToken]);
+
+router.use('/dashboard/add-product', [authorization, addProduct]);
 
 export default router;
