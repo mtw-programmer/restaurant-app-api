@@ -45,7 +45,7 @@
               properties:
                 msg:
                   type: string
-                  example: Successfully added new product!
+                  example: Successfully added a new product!
       400:
         description: Bad Request (invalid data or token)
         content:
