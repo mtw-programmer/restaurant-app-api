@@ -214,12 +214,10 @@ describe('PATCH /api/dashboard/update-product/:id', () => {
     const updatedProduct = await Product.findOne({ _id: productId });
     
     expect(res.status).toBe(200);
-    expect(updatedProduct).toMatchObject({
-      title: 'Updated Title',
-      img: 'test.png',
-      description: 'D1',
-      price: '0.02'
-    });
+    expect(updatedProduct?.title).toBe('Updated Title');
+    expect(updatedProduct?.img).toBe('test.png');
+    expect(updatedProduct?.description).toBe('D1');
+    expect(updatedProduct?.price).toBe(0.02);
     expect(res.body.msg).toBeDefined();
   });
   
@@ -233,12 +231,10 @@ describe('PATCH /api/dashboard/update-product/:id', () => {
     const updatedProduct = await Product.findOne({ _id: productId });
     
     expect(res.status).toBe(200);
-    expect(updatedProduct).toMatchObject({
-      title: 'P1',
-      img: 'test.png',
-      description: 'Updated Description',
-      price: '0.02'
-    });
+    expect(updatedProduct?.title).toBe('P1');
+    expect(updatedProduct?.img).toBe('test.png');
+    expect(updatedProduct?.description).toBe('Updated Description');
+    expect(updatedProduct?.price).toBe(0.02);
     expect(res.body.msg).toBeDefined();
   });
   
@@ -252,26 +248,30 @@ describe('PATCH /api/dashboard/update-product/:id', () => {
     const updatedProduct = await Product.findOne({ _id: productId });
     
     expect(res.status).toBe(200);
-    expect(updatedProduct).toMatchObject({
-      title: 'P1',
-      img: 'test.png',
-      description: 'D1',
-      price: '5.99'
-    });
+    expect(updatedProduct?.title).toBe('P1');
+    expect(updatedProduct?.img).toBe('test.png');
+    expect(updatedProduct?.description).toBe('D1');
+    expect(updatedProduct?.price).toBe(5.99);
     expect(res.body.msg).toBeDefined();
   });
 
   it('should return 400 when given image has not a valid extension', async () => {
     const { oldProduct, res, updatedProduct } = await testImage('test.txt');
     expect(res.status).toBe(400);
-    expect(oldProduct).toMatchObject(updatedProduct);
+    expect(oldProduct?.title).toBe(updatedProduct?.title);
+    expect(oldProduct?.img).toBe(updatedProduct?.img);
+    expect(oldProduct?.description).toBe(updatedProduct?.description);
+    expect(oldProduct?.price).toBe(updatedProduct?.price);
     expect(res.body.msg).toBeDefined();
   });
 
   it('should return 400 when given image is too big', async () => {
     const { oldProduct, res, updatedProduct } = await testImage('big.jpg');
     expect(res.status).toBe(400);
-    expect(oldProduct).toMatchObject(updatedProduct);
+    expect(oldProduct?.title).toBe(updatedProduct?.title);
+    expect(oldProduct?.img).toBe(updatedProduct?.img);
+    expect(oldProduct?.description).toBe(updatedProduct?.description);
+    expect(oldProduct?.price).toBe(updatedProduct?.price);
     expect(res.body.msg).toBeDefined();
   });
   
@@ -345,11 +345,10 @@ describe('PATCH /api/dashboard/update-product/:id', () => {
       .field('price', 5.99);
 
     const updatedProduct = await Product.findOne({ _id: productId }).select('title price');
-    const path = `./media/products/${productId}/`;
 
     expect(res.status).toBe(200);
     expect(updatedProduct.title).toBe('Updated Title');
-    expect(updatedProduct.price).toBe('5.99');
+    expect(updatedProduct.price).toBe(5.99);
     expect(res.body.msg).toBeDefined();
   });
 });
