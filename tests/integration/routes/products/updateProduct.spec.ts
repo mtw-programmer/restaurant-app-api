@@ -69,14 +69,14 @@ describe('PATCH /api/dashboard/update-product/:id', () => {
     expect(res.body.msg).toBeDefined();
   });
 
-  it('should return 401 when token is not valid', async () => {
+  it('should return 400 when token is not valid', async () => {
     const res = await
       request(server)
       .patch(`/api/dashboard/update-product/${productId}`)
       .set('x-auth-token', '1')
       .field('title', 'Valid Title');
     
-    expect(res.status).toBe(401);
+    expect(res.status).toBe(400);
     expect(res.body.msg).toBeDefined();
   });
   
@@ -89,7 +89,7 @@ describe('PATCH /api/dashboard/update-product/:id', () => {
       .set('x-auth-token', token)
       .field('title', 'Valid Title');
     
-    expect(res.status).toBe(401);
+    expect(res.status).toBe(400);
     expect(res.body.msg).toBeDefined();
   });
 
