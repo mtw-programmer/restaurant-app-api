@@ -8,7 +8,6 @@ import validate from '../../validate/updateProduct';
 import Product from '../../models/Product';
 
 const router = Router();
-const _id = new Types.ObjectId();
 
 router.patch('/:id', async (req:Request, res:Response) => {
   const { id } = req.params;
@@ -19,11 +18,11 @@ router.patch('/:id', async (req:Request, res:Response) => {
   if (!await Product.exists({ _id: id }))
     return res.status(400).json({ msg: 'Invalid ID!' });
 
-  const path = `./media/products/${_id}`;
-
-  const upload = uploadFile(req, res, path);
+  const path = `./media/products/${id}`;
 
   const { img } = await Product.findOne({ _id: id }).select('img');
+
+  const upload = uploadFile(req, res, path);
   
   upload(req, res, async (err) => {
     const { title, description, price } = req.body;
