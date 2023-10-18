@@ -13,24 +13,27 @@ export default (req: Request, res:Response, filePath: string):RequestHandler =>
   multer({
     storage: multer.diskStorage({
       destination: (_req:Request, _file:Express.Multer.File, cb:DestinationCallback):void => {
-        fs.mkdirSync(filePath, { recursive: true });
+        if (!fs.existsSync(filePath))
+          fs.mkdirSync(filePath, { recursive: true });
+
         cb(null, filePath);
       },
       filename: (_req:Request, file:Express.Multer.File, cb:FileNameCallback):void => {
         cb(null, `${uuidv4()}${path.extname(file.originalname)}`);
       },
-    }),
+    },
+    ),
     limits: { fileSize: fileLimit },
     fileFilter: (_req:Request, file:Express.Multer.File, cb:FileFilterCallback):void|Express.Response => {
       const fileFormats = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
 
+      if (!fileFormats.includes(file.mimetype))
+        return res.status(400).json({ msg: 'We support only jpg, jpeg, png and gif files!' });
+
       const fileSize = parseInt(req.headers['content-length']);
-    
+
       if (fileSize > fileLimit)
         return res.status(400).json({ msg: 'We support only files up to 7MB!' });
-
-      if (!fileFormats.includes(file.mimetype))
-          return res.status(400).json({ msg: 'We support only jpg, jpeg, png and gif files!' });
       
       cb(null, true);
     }

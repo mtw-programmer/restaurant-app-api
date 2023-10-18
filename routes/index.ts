@@ -7,6 +7,7 @@ import authorization from '../middleware/authorization';
 import verifyToken from './auth/verifyToken';
 
 import addProduct from './products/addProduct';
+import updateProduct from './products/updateProduct';
 import deleteProduct from './products/deleteProduct';
 
 const router = Router();
@@ -17,6 +18,7 @@ router.use('/authentication', authentication);
 router.use('/verify-token', [authorization, verifyToken]);
 
 router.use('/dashboard/add-product', [authorization, addProduct]);
+router.use('/dashboard/update-product', [authorization, updateProduct]);
 router.use('/dashboard/delete-product', [authorization, deleteProduct]);
 
 export default router;

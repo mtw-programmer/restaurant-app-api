@@ -66,7 +66,7 @@ describe('PUT /api/dashboard/add-product', () => {
     expect(res.body.msg).toBeDefined();
   });
 
-  it('should return 401 when token is not valid', async () => {
+  it('should return 400 when token is not valid', async () => {
     const res = await exec('1', goodProduct);
     expect(res.status).toBe(400);
     expect(res.body.msg).toBeDefined();
