@@ -1,6 +1,6 @@
 /api/dashboard/add-product:
   put:
-    summary: Add a new Product
+    summary: Adds a new Product
     tags: [Dashboard]
     parameters:
       - name: x-auth-token

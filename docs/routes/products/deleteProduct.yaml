@@ -1,6 +1,6 @@
 /api/dashboard/delete-product/{id}:
   delete:
-    summary: Delete a Product
+    summary: Deletes the Product
     tags: [Dashboard]
     parameters:
       - name: x-auth-token
