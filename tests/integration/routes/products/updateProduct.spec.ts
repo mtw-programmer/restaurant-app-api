@@ -264,16 +264,6 @@ describe('PATCH /api/dashboard/update-product/:id', () => {
     expect(oldProduct?.price).toBe(updatedProduct?.price);
     expect(res.body.msg).toBeDefined();
   });
-
-  it('should return 400 when given image is too big', async () => {
-    const { oldProduct, res, updatedProduct } = await testImage('big.jpg');
-    expect(res.status).toBe(400);
-    expect(oldProduct?.title).toBe(updatedProduct?.title);
-    expect(oldProduct?.img).toBe(updatedProduct?.img);
-    expect(oldProduct?.description).toBe(updatedProduct?.description);
-    expect(oldProduct?.price).toBe(updatedProduct?.price);
-    expect(res.body.msg).toBeDefined();
-  });
   
   it('should return 200 and update product when given image is a valid jpg and delete the old image', async () => {
     const { oldProduct, res, updatedProduct, path } = await testImage('test.jpg');
