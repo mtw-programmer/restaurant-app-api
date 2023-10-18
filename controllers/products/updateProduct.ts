@@ -25,14 +25,14 @@ router.patch('/:id', async (req:Request, res:Response) => {
   const upload = uploadFile(req, res, path);
   
   upload(req, res, async (err) => {
+    if (err instanceof MulterError)
+      return res.status(400).json({ msg: err });
+    else if (err)
+      errorHandle('Update Product / Upload', res, `${err}`);
+
     const { title, description, price } = req.body;
 
     if (req.file !== undefined) {
-      if (err instanceof MulterError)
-        return res.status(400).json({ msg: err });
-      else if (err)
-        errorHandle('Update Product / Upload', res, `${err}`);
-
       if (title || description || price) {
         const { error } = validate(req.body);
         if (error)
