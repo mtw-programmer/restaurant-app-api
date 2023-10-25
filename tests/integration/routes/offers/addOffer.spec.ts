@@ -17,7 +17,7 @@ describe('PUT /api/dashboard/add-offer', () => {
       .body(body);
 
   let token:string|undefined;
-  let items;
+  let items:any = [];
   let goodOffer;
   
   beforeEach(async () => {
