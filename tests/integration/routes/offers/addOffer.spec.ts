@@ -43,14 +43,14 @@ describe('PUT /api/dashboard/add-offer', () => {
 
     toSave.forEach(async (item) => items.push(await item.save()));
 
+    const res = await request(server).post('/api/authentication').send({ username: 'admin', password: '1234567890' });
+    token = res.header['x-auth-token'];
+
     goodOffer = {
       items: [items[0]._id, items[1]._id],
       price: 11.99,
       expires: new Date(new Date().getTime() + 60 * 60 * 24 * 1000)
     };
-
-    const res = await request(server).post('/api/authentication').send({ username: 'admin', password: '1234567890' });
-    token = res.header['x-auth-token'];
   });
 
   afterEach(() => clearDB());
