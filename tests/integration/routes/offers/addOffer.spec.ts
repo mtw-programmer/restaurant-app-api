@@ -62,7 +62,7 @@ describe('PUT /api/dashboard/add-offer', () => {
     const res = await
       request(server)
         .put('/api/dashboard/add-offer')
-        .body(goodOffer);
+        .send(goodOffer);
     
     expect(res.status).toBe(401);
     expect(res.body.msg).toBeDefined();
