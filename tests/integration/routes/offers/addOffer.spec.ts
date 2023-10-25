@@ -14,7 +14,7 @@ describe('PUT /api/dashboard/add-offer', () => {
     request(server)
       .put('/api/dashboard/add-offer')
       .set('x-auth-token', token)
-      .body(body);
+      .send(body);
 
   let token:string|undefined;
   let items:any = [];
