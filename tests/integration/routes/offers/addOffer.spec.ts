@@ -23,16 +23,16 @@ describe('PUT /api/dashboard/add-offer', () => {
   beforeEach(async () => {
     const toSave = [
       new Product({
-        title: 'P2',
+        title: 'P1',
         img: 'test.png',
         description: 'D1',
-        price: '0.02'
+        price: 0.02
       }),
       new Product({
         title: 'P2',
         img: 'test.png',
         description: 'D2',
-        price: '19.99'
+        price: 19.99
       }),
       new Admin({
         username: 'admin',
