@@ -46,7 +46,7 @@ describe('PUT /api/dashboard/add-offer', () => {
     goodOffer = {
       items: [items[0]._id, items[1]._id],
       price: 11.99,
-      expires: new Date()
+      expires: new Date(new Date().getTime() + 60 * 60 * 24 * 1000)
     };
 
     const res = await request(server).post('/api/authentication').send({ username: 'admin', password: '1234567890' });
