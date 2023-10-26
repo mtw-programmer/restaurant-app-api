@@ -201,6 +201,13 @@ describe('PUT /api/dashboard/add-offer', () => {
     const offer = _.omit(goodOffer, 'items');
     offer.items = [`${goodOffer.items[0]}`];
     const res = await exec(token, offer);
+
+    const savedOffer = await Offer.findOne({ items: [goodOffer.items[0]] });
+
+    expect(savedOffer?._id).toBeDefined();
+    expect(savedOffer?.items.length).toBe(1);
+    expect(savedOffer?.expires).toBeDefined();
+    expect(savedOffer?.createdAt).toBeDefined();
     
     expect(res.status).toBe(200);
     expect(res.body.msg).toBeDefined();
@@ -208,6 +215,13 @@ describe('PUT /api/dashboard/add-offer', () => {
   
   it('should return 200 when more items given', async () => {
     const res = await exec(token, goodOffer);
+
+    const savedOffer = await Offer.findOne({ items: goodOffer.items });
+
+    expect(savedOffer?._id).toBeDefined();
+    expect(savedOffer?.items.length).toBe(2);
+    expect(savedOffer?.expires).toBeDefined();
+    expect(savedOffer?.createdAt).toBeDefined();
     
     expect(res.status).toBe(200);
     expect(res.body.msg).toBeDefined();
