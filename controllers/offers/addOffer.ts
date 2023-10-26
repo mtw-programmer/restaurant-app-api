@@ -19,7 +19,7 @@ router.put('/', async (req:Request, res:Response) => {
     if (moment(req.body.expires) <= moment())
       return res.status(400).json({ msg: 'The given date is expired!' });
     
-    const products = await Product.find({ _id: { $in: req.body.items } });
+    const products = await Product.find({ _id: { $in: req.body.items }});
 
     if (req.body.items.length !== products.length)
       return res.status(400).json({ msg: 'The given item has an invalid ID!' });
