@@ -212,9 +212,10 @@ describe('PUT /api/dashboard/add-offer', () => {
     expect(res.status).toBe(200);
     expect(res.body.msg).toBeDefined();
   });
+
   
-  it('should return 200 when more items given', async () => {
-    const res = await exec(token, goodOffer);
+  it('should return 200 when more items given and should no throw when extra property given', async () => {
+    const res = await exec(token, { ...goodOffer, extra: 'property' });
 
     const savedOffer = await Offer.findOne({ items: goodOffer.items });
 
