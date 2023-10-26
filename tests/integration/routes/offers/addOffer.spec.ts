@@ -21,6 +21,8 @@ describe('PUT /api/dashboard/add-offer', () => {
   let goodOffer;
   
   beforeEach(async () => {
+    items = [];
+
     const toSave = [
       new Product({
         title: 'P1',
@@ -47,7 +49,7 @@ describe('PUT /api/dashboard/add-offer', () => {
     token = res.header['x-auth-token'];
 
     goodOffer = {
-      items: [items[0]._id, items[1]._id],
+      items: [`${items[0]._id}`, `${items[1]._id}`],
       price: 11.99,
       expires: new Date(new Date().getTime() + 60 * 60 * 24 * 1000)
     };
@@ -196,8 +198,8 @@ describe('PUT /api/dashboard/add-offer', () => {
   });
   
   it('should return 200 when one item given', async () => {
-    const offer = { ...goodOffer };
-    delete offer.items[1];
+    const offer = _.omit(goodOffer, 'items');
+    offer.items = [`${goodOffer.items[0]}`];
     const res = await exec(token, offer);
     
     expect(res.status).toBe(200);
