@@ -1,0 +1,82 @@
+/api/dashboard/add-offer:
+  put:
+    summary: Add Special Offer
+    tags: [Dashboard]
+    parameters:
+      - name: x-auth-token
+        in: header
+        type: string
+        description: JWT Authentication token
+        required: true
+    requestBody:
+      description: The offer properties
+      required:
+        - items
+        - price
+        - expires
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              items:
+                type: array
+                items:
+                  type: string
+                  description: Mongoose ID of the product
+                  minItems: 1
+                  maxItems: 3
+                  required: true
+                  example: 64d656374666f5e967e89856
+              price:
+                  type: number
+                  minimum: 0.01
+                  maximum: 9999999
+                  required: true
+                  description: Price of the Offer in dollars
+              expires:
+                  type: string
+                  format: date-time
+                  required: true
+                  description: Date and time when Offer expires
+    responses:
+      200:
+        description: Successfully added a new offer
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                  example: Successfully added a new offer!
+      400:
+        description: Invalid token or invalid data given
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                  example: The given item has an invalid ID!
+      401:
+        description: No token provided!
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                  example: Access denied! Please, log in.
+      500:
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                  example: Something went wrong! Please, try again later.
