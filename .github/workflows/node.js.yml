@@ -29,7 +29,11 @@ jobs:
     - name: Run in background
       run: |
         sudo docker run -d -p 27017:27017 mongo:latest
-        npm install
+        npm install ts-node
     - name: Testing
-      run: NODE_ENV=test npx jest --watchAll --maxWorkers=50% --detectOpenHandles 
+      run: |
+        npm install
+
+        npm run build --if-present
+        NODE_ENV=test npx jest --watchAll --maxWorkers=50% --detectOpenHandles
   
