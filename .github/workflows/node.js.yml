@@ -31,4 +31,5 @@ jobs:
         sudo docker run -d -p 27017:27017 mongo:latest
         npm install
     - name: Testing
-      run: npm run test
+      run: NODE_ENV=test npx jest --watchAll --maxWorkers=50% --detectOpenHandles 
+  
