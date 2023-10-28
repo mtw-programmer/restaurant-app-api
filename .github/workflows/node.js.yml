@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [20.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -29,11 +29,11 @@ jobs:
     - name: Run in background
       run: |
         sudo docker run -d -p 27017:27017 mongo:latest
-        npm install -g typescript
+        npm install typescript
         npm install ts-node
+        npm install
     - name: Testing
       run: |
-        npm install
         npm run build --if-present
         NODE_ENV=test npx jest --watchAll --maxWorkers=50% --detectOpenHandles
   
