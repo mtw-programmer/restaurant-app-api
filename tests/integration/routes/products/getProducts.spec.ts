@@ -1,4 +1,5 @@
 import request from 'supertest';
+import mongoose from 'mongoose';
 import server from '../../../../index';
 import Product from '../../../../models/Product';
 import clearDB from '../../helpers/clearDB';
@@ -31,8 +32,9 @@ describe('GET /api/get-products', () => {
   });
 
   afterEach(() => clearDB());
-  afterAll(() => {
+  afterAll(async () => {
     server.close();
+    await mongoose.connection.close();
   });
 
   it('should return all products (without __v property and with createdAt property)', async () => {

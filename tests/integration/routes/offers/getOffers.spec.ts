@@ -1,4 +1,5 @@
 import request from 'supertest';
+import mongoose from 'mongoose';
 import server from '../../../../index';
 import Product from '../../../../models/Product';
 import Offer from '../../../../models/Offer';
@@ -58,8 +59,9 @@ describe('GET /api/get-special-offers', () => {
     clearDB();
     productsId = [];
   });
-  afterAll(() => {
+  afterAll(async () => {
     server.close();
+    await mongoose.connection.close();
   });
 
   it('should return all offers (without __v property and with createdAt property)', async () => {

@@ -1,4 +1,5 @@
 import request from 'supertest';
+import mongoose from 'mongoose';
 import server from '../../../../index';
 import jwt from 'jsonwebtoken';
 
@@ -21,8 +22,9 @@ describe('POST /api/authentication', () => {
   });
 
   afterEach(() => clearDB());
-  afterAll(() => {
+  afterAll(async () => {
     server.close();
+    await mongoose.connection.close();
   });
 
   it('should return 400 when no request body', async () => {

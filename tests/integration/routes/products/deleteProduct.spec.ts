@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { Types } from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 import jwt from 'jsonwebtoken';
 import fs from 'fs';
 import _ from 'lodash';
@@ -46,8 +46,9 @@ describe('DELETE /api/dashboard/delete-product/:id', () => {
   });
 
   afterEach(() => clearDB());
-  afterAll(() => {
+  afterAll(async () => {
     server.close();
+    await mongoose.connection.close();
   });
 
   it('should return 401 when no token provided', async () => {

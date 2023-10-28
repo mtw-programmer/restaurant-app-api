@@ -1,4 +1,5 @@
 import request from 'supertest';
+import mongoose from 'mongoose';
 import server from '../../../../index';
 
 import Admin from '../../../../models/Admin';
@@ -19,8 +20,9 @@ describe('POST /api/verify-token', () => {
   });
 
   afterEach(() => clearDB());
-  afterAll(() => {
+  afterAll(async () => {
     server.close();
+    await mongoose.connection.close();
   });
 
   it('should return 401 when no token provided', async () => {
