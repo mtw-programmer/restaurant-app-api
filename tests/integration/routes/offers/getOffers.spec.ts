@@ -60,6 +60,8 @@ describe('GET /api/get-special-offers', () => {
     productsId = [];
   });
   afterAll(async () => {
+    await Product.deleteMany({});
+    await Offer.deleteMany({});
     await mongoose.connection.close();
     server.close();
   });
