@@ -6,8 +6,6 @@ import Offer from '../../../../models/Offer';
 import clearDB from '../../helpers/clearDB';
 
 describe('GET /api/get-special-offers', () => {
-  beforeAll(() => clearDB());
-
   const exec = async () => request(server).get('/api/get-special-offers').send();
 
   let productsId:any = [];
@@ -27,6 +25,8 @@ describe('GET /api/get-special-offers', () => {
   ];
   
   beforeEach(async () => {
+    clearDB();
+
     const p = new Product(products[0]);
     const result1 = await p.save();
     productsId.push(result1._id);
@@ -60,8 +60,8 @@ describe('GET /api/get-special-offers', () => {
     productsId = [];
   });
   afterAll(async () => {
-    server.close();
     await mongoose.connection.close();
+    server.close();
   });
 
   it('should return all offers (without __v property and with createdAt property)', async () => {
