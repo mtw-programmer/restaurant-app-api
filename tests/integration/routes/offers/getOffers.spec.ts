@@ -1,12 +1,11 @@
 import request from 'supertest';
+import mongoose from 'mongoose';
 import server from '../../../../index';
 import Product from '../../../../models/Product';
 import Offer from '../../../../models/Offer';
 import clearDB from '../../helpers/clearDB';
 
 describe('GET /api/get-special-offers', () => {
-  beforeAll(() => clearDB());
-
   const exec = async () => request(server).get('/api/get-special-offers').send();
 
   let productsId:any = [];
@@ -26,6 +25,8 @@ describe('GET /api/get-special-offers', () => {
   ];
   
   beforeEach(async () => {
+    clearDB();
+
     const p = new Product(products[0]);
     const result1 = await p.save();
     productsId.push(result1._id);
@@ -58,7 +59,10 @@ describe('GET /api/get-special-offers', () => {
     clearDB();
     productsId = [];
   });
-  afterAll(() => {
+  afterAll(async () => {
+    await Product.deleteMany({});
+    await Offer.deleteMany({});
+    await mongoose.connection.close();
     server.close();
   });
 

@@ -1,5 +1,6 @@
 import request from 'supertest';
 import _ from 'lodash';
+import mongoose from 'mongoose';
 import server from '../../../../index';
 import Product from '../../../../models/Product';
 import Offer from '../../../../models/Offer';
@@ -56,8 +57,9 @@ describe('PUT /api/dashboard/add-offer', () => {
   });
 
   afterEach(() => clearDB());
-  afterAll(() => {
+  afterAll(async () => {
     server.close();
+    await mongoose.connection.close();
   });
 
   it('should return 401 when no token provided', async () => {
