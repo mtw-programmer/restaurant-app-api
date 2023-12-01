@@ -1,6 +1,6 @@
 /api/dashboard/add-offer:
   put:
-    summary: Add Special Offer
+    summary: Adds a Special Offer
     tags: [Dashboard]
     parameters:
       - name: x-auth-token
