@@ -74,12 +74,12 @@ $ npm run dev
 
 - API endpoints
 
-![dashboard](https://github.com/mtw-programmer/restaurant-app-api/blob/update-readme/readme/docs/dashboard.png?raw=true)
-![offer](https://github.com/mtw-programmer/restaurant-app-api/blob/update-readme/readme/docs/offer.png?raw=true)
-![product](https://github.com/mtw-programmer/restaurant-app-api/blob/update-readme/readme/docs/product.png?raw=true)
+![dashboard](https://github.com/mtw-programmer/restaurant-app-api/blob/main/readme/docs/dashboard.png?raw=true)
+![offer](https://github.com/mtw-programmer/restaurant-app-api/blob/main/readme/docs/offer.png?raw=true)
+![product](https://github.com/mtw-programmer/restaurant-app-api/blob/main/readme/docs/product.png?raw=true)
 
 - Schemas
 
-![admin_schema](https://github.com/mtw-programmer/restaurant-app-api/blob/update-readme/readme/docs/admin_schema.png?raw=true)
-![offer_schema](https://github.com/mtw-programmer/restaurant-app-api/blob/update-readme/readme/docs/offer_schema.png?raw=true)
-![product_schema](https://github.com/mtw-programmer/restaurant-app-api/blob/update-readme/readme/docs/product_schema.png?raw=true)
+![admin_schema](https://github.com/mtw-programmer/restaurant-app-api/blob/main/readme/docs/admin_schema.png?raw=true)
+![offer_schema](https://github.com/mtw-programmer/restaurant-app-api/blob/main/readme/docs/offer_schema.png?raw=true)
+![product_schema](https://github.com/mtw-programmer/restaurant-app-api/blob/main/readme/docs/product_schema.png?raw=true)
