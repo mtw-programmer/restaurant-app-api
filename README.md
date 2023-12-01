@@ -8,6 +8,8 @@ API allowing to manage restaurant infrastructure.
 $ npm install
 ```
 
+- Run MongoDB database with the parameters declared in config
+
 ## create config
 
 ```
